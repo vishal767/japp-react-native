@@ -9,7 +9,7 @@ import {
   TextInput,
   StatusBar,
   AsyncStorage,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import {
     Container,
@@ -18,7 +18,7 @@ import {
   } from "native-base";
   import appImage from './src/images/back.png';
   import {connect} from 'react-redux';
-  import {CONSTANTS} from './Constants';
+  import {CONSTANTS,styles,COLORS} from './Constants';
 
 
 
@@ -52,103 +52,58 @@ type Props = {};
           backgroundColor="#2B2B2B"
           barStyle="light-content"
           />
-          <ImageBackground source={require('./src/images/back.png')} style={{width: '100%', height: '100%'}}>
-        <View style={styles.MainView}>
-        <Content>
-        <View style={styles.headerView}>
-          <Text style={styles.header}>{CONSTANTS.APPNAME}</Text>
-        </View>
-        <View style={styles.loginView}>
+        <View style={{flex:1,backgroundColor:COLORS.WHITE}}>
+          <View style={{flex:2.5,justifyContent:'center'}}>
+            <Text style={styles.welcomeText}>{'Hey There! Welcome Back!'}</Text>
+          </View>
+          <View style={{flex:5,padding:20}}>
+          <Text style={styles.textHeader}>{CONSTANTS.EMAIL}</Text>
+            <TextInput
 
-        <Text style={styles.textHeader}>{CONSTANTS.EMAIL}</Text>
-        <TextInput
-          style={styles.textInputLayout}
-          value={this.state.email}
-          onChangeText={email => this.setState({ email: email  })}
-          keyboardType='email-address'
-          autoCapitalize="none"
-        />
-        <Text style={styles.textHeader}>{CONSTANTS.PASSWORD}</Text>
-        <TextInput
-          style={styles.textInputLayout}
-          secureTextEntry value={this.state.password}
-          onChangeText={password => this.setState({ password: password  })}
-        />
-        </View>
+              style={styles.textInputLayout}
+              value={this.state.email}
+              onChangeText={email => this.setState({ email: email  })}
+              keyboardType='email-address'
+              autoCapitalize="none"
+              placeholder="you@example.com"
+              placeholderTextColor={COLORS.PLACEHOLDERTEXTCOLOR}
+            />
+            <Text style={styles.textHeader}>{CONSTANTS.PASSWORD}</Text>
+            <TextInput
 
-          <TouchableHighlight style={styles.signin}
-          onPress={this.login.bind(this)}>
+              style={styles.textInputLayout}
+              secureTextEntry value={this.state.password}
+              onChangeText={password => this.setState({ password: password  })}
+              placeholderTextColor={COLORS.PLACEHOLDERTEXTCOLOR}
+              placeholder="*******"
+            />
+            <TouchableHighlight style={styles.signin}>
             <Text style={styles.LoginText}>{CONSTANTS.LOGIN}</Text>
           </TouchableHighlight>
-          </Content>
+            <View style={{flex:1,flexDirection:'row'}}>
+              <View style={styles.iconCol}>
+                <Image source={require('./src/images/twitter.png')} style={{width:40,height:40}}/>
+              </View>
+              <View style={styles.iconCol}>
+              <Image source={require('./src/images/facebook.png')} style={{width:40,height:40}}/>
+              </View>
+              <View style={styles.iconCol}>
+              <Image source={require('./src/images/google.png')} style={{width:40,height:40}}/>
+              </View>
+            </View>
           </View>
-          </ImageBackground>
+          <View style={{flex:2}}>
+            <Text style={styles.signup}><Text>{CONSTANTS.SIGNUPTEXT}</Text><Text style={styles.signupColor}>{CONSTANTS.SIGNUP}</Text></Text>
+
+          </View>
+        </View>
       </Container>
     );
   }
 }
 export default connect(null, null)(StartPage);
 
-const styles = StyleSheet.create({
-  MainView:{
-    height: '100%',
-     width: '100%',
-    flex:1,
-   },
-  headerView:{ justifyContent: 'center', alignItems: 'center', height: 200, paddingTop: 40},
-  header:{
-    color:CONSTANTS.APPCOLOR,
-    fontFamily:'Lato',
-    fontSize:70
-  },
-  loginView:{ marginLeft: '10%',marginRight: '10%'},
-    container: {
-        flex: 1,
-      justifyContent: 'center'
-    },
-    color: {
-        color: '#000'
-    },
-    text: {
-        alignSelf: 'center',
-        color: '#C0C0C0',
-        fontSize: 16,
-        fontWeight: '600',
-        paddingTop: 10,
-        paddingBottom: 10
-    },
-    LoginText: {
-        alignSelf: 'center',
-        color: 'white',
-        fontSize: 16,
-        fontWeight: '600',
-        fontFamily: 'Lato-Bold',
-        paddingTop: 14,
-        paddingBottom: 10
-    },
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover', // or 'stretch'
-      },
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-    },
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
-    },
-    signin:{
-      borderRadius:70,
-       backgroundColor: CONSTANTS.APPCOLOR,
-        margin: 50,
-         height: 50
-       },
-       textHeader:{ color:CONSTANTS.TEXTLABELCOLOR, marginTop: 10, marginBottom:5},
-       textInputLayout:{borderBottomColor: 'gray', borderBottomWidth: 1, color: 'white', height: 40},
-  });
+
 
   // <Header androidStatusBarColor='#2D2D2D' style={{backgroundColor:'#2B2B2B'}}>
   //       <Left style={{marginLeft:5}}>
